@@ -4,10 +4,11 @@ ARG UID=1030
 ARG GID=100
 
 RUN (addgroup --gid $GID ankigrp || true) && \
-	adduser --home /home/anki \
+	adduser --disabled-password --comment "anki" \
+	--home /home/anki \
 	--uid $UID --gid $GID \
 	anki && \
-	echo "[building with]: $UID:$GID" && \
+	echo "[with]: $UID:$GID" && \
 	apt update -y && \
 	apt install -y --auto-remove python3 \
 	python3-pip python3-venv && \
