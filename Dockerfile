@@ -22,4 +22,4 @@ ENV SYNC_PORT=${SYNC_PORT:-"8080"}
 
 EXPOSE ${SYNC_PORT}
 
-CMD ["/etc/syncserver/bin/python", "-m", "anki.syncserver"]
+CMD ["/etc/syncserver/bin/python3", "-m", "anki.syncserver"]
