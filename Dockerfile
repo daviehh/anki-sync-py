@@ -3,6 +3,7 @@ FROM debian:bookworm-slim
 ARG UID=1030
 ARG GID=100
 
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 RUN (addgroup --gid $GID ankigrp || true) && \
 	adduser --disabled-password --comment "anki" \
 	--home /home/anki \
@@ -11,10 +12,11 @@ RUN (addgroup --gid $GID ankigrp || true) && \
 	echo "[with]: $UID:$GID" && \
 	apt update -y && \
 	apt install -y --auto-remove python3 \
-	python3-pip python3-venv && \
+	python3-venv && \
 	apt clean -y && \
-	python3 -m venv /etc/syncserver && \
-	/etc/syncserver/bin/pip install --pre anki
+	uv venv /etc/syncserver && \
+ 	source /etc/syncserver/bin/activate && \
+	uv pip install --pre anki
 
 USER anki
 
