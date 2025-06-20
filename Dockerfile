@@ -15,8 +15,7 @@ RUN (addgroup --gid $GID ankigrp || true) && \
 	python3-venv && \
 	apt clean -y && \
 	uv venv /etc/syncserver && \
- 	source /etc/syncserver/bin/activate && \
-	uv pip install --pre anki
+ 	bash -c "source /etc/syncserver/bin/activate && uv pip install --pre anki"
 
 USER anki
 
